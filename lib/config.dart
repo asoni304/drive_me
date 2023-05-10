@@ -7,4 +7,4 @@ String mapKey= "AIzaSyAZS1XwNZaCE7wIv8buxB9-wNLYsYxp6rY";
 
 User? firebaseUser;
 
-Users? currentUserInfo;
+ Users? currentUserInfo;

@@ -1,10 +1,10 @@
 import 'package:firebase_database/firebase_database.dart';
 
 class Users{
-  late String id;
-  late String email;
-  late String name;
-  late String phone;
+   String? id;
+   String? email;
+  String? name;
+  String? phone;
 
   Users({required this.phone,required this.id,required this.name,required this.email});
 

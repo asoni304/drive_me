@@ -1,6 +1,7 @@
 import 'package:drive_me/screens/login_screen.dart';
 import 'package:drive_me/screens/register_screen.dart';
 import 'package:drive_me/screens/search_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var userSignedIn = FirebaseAuth.instance.currentUser !=null;
     return ChangeNotifierProvider(
       create: (BuildContext context)=>AppData(),
       child: MaterialApp(
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Brand Bold',
           primarySwatch: Colors.green,
         ),
-        initialRoute: LoginScreen.idScreen,
+        initialRoute: userSignedIn? MainScreen.idScreen: LoginScreen.idScreen,
         routes: {
           RegisterScreen.idScreen:(context)=>RegisterScreen(),
           MainScreen.idScreen:(context)=>MainScreen(),

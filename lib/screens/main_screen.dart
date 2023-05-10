@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:drive_me/config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:drive_me/widgets/divider.dart';
@@ -15,6 +16,7 @@ import '../assistants/methods_assistant.dart';
 import '../data_handler/app_data.dart';
 import '../models/direction_details.dart';
 import '../widgets/progress_dialog.dart';
+import 'login_screen.dart';
 import 'search_screen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
@@ -27,6 +29,19 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+    print("calling locate position");
+    locatePosition();
+    WidgetsBinding.instance.addPostFrameCallback((_) => locatePosition());
+
+    print('calling the method get user');
+    WidgetsBinding.instance.addPostFrameCallback((_) => MethodsAssistant.getCurrentUserInfo());
+
+  }
+
+
   final GeolocatorPlatform _geolocatorPlatform = GeolocatorPlatform.instance;
   //final List<_PositionItem> _positionItems = <_PositionItem>[];
   GlobalKey<ScaffoldState> scaffoldKey =new GlobalKey<ScaffoldState>();
@@ -54,11 +69,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   DatabaseReference? rideRequestRef;
 
 
-  @override
-  void initState() {
-    super.initState();
-    MethodsAssistant.getCurrentUserInfo();
-  }
+
 
   void saveRideRequestInfo(){
     rideRequestRef =FirebaseDatabase.instance.ref().child("ride requests").push();
@@ -221,7 +232,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Profile Name',style: TextStyle(fontSize: 16),),
+                            Text('Name',style: TextStyle(fontSize: 16),),
                             SizedBox(height: 6,),
                             Text('Visit Profile'),
 
@@ -246,6 +257,14 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               ListTile(
                 leading: Icon(Icons.info),
                 title: Text('About',style: TextStyle(fontSize: 15),),
+              ),
+              ListTile(
+                onTap: (){
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pushNamedAndRemoveUntil(context, LoginScreen.idScreen, (route) => false);
+                },
+                leading: Icon(Icons.exit_to_app),
+                title: Text('Logout',style: TextStyle(fontSize: 15),),
               ),
 
 
@@ -286,7 +305,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             child: GestureDetector(
               onTap: (){
                 if(drawerOpen){
-                  scaffoldKey.currentState?.openDrawer();
+
+                 scaffoldKey.currentState?.openDrawer();
                 }
                 else{
                   resetApp();
