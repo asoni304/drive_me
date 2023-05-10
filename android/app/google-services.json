@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "105224323596",
+    "project_id": "drive-me-f0311",
+    "storage_bucket": "drive-me-f0311.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105224323596:android:7f5704db1ddfb17636a429",
+        "android_client_info": {
+          "package_name": "com.example.drive_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105224323596-dqtl62hqk110eut3338plsk0han93g2l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.drive_me",
+            "certificate_hash": "ad33cbae0eee559b8458da78f492f29580ad768a"
+          }
+        },
+        {
+          "client_id": "105224323596-ei13ivpgr68l71eo9thk38ooulnojhds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZS1XwNZaCE7wIv8buxB9-wNLYsYxp6rY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105224323596-ei13ivpgr68l71eo9thk38ooulnojhds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
